@@ -1,15 +1,15 @@
 OBJS = src/main.o
 CC = g++
 DEBUG = -g
-LIBS = -Iinclude -Llib -ltcod -ltcodxx -Wl,-rpath=lib
-CFLAGS = -Wall -c $(LIBS) $(DEBUG)
-LFLAGS = -Wall $(LIBS) $(DEBUG)
+CFLAGS = -Wall -Iinclude $(DEBUG)
+LDFLAGS = -Llib -ltcod -ltcodxx -Wl,-rpath=lib
 
 brotrrl: $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o brotrrl
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o brotrrl
 
 src/main.o: src/main.cpp
-	$(CC) $(CFLAGS) src/main.cpp -o src/main.o
+	$(CC) $(CFLAGS) -c src/main.cpp -o src/main.o
 
+.PHONY: clean
 clean:
-	\rm -f src/*.o brotrrl
+	rm -f src/*.o brotrrl
